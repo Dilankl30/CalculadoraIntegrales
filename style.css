@@ -1,0 +1,213 @@
+/* --- Paleta de Colores Celeste Claro --- */
+:root {
+    --primary-blue: #87ceeb; /* Azul cielo / Celeste principal */
+    --dark-blue: #4682b4;    /* Azul acero / Tono oscuro para textos y bordes */
+    --light-bg: #f0f8ff;     /* Fondo blanco azulado / Azure */
+    --header-bg: #add8e6;    /* Azul claro / Encabezado */
+    --error-red: #e74c3c;
+    --success-green: #2ecc71;
+    --gray-button: #a9a9a9;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: var(--light-bg); /* Nuevo fondo */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 60px; 
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    background-color: var(--header-bg); /* Nuevo color de encabezado */
+    color: var(--dark-blue);
+    padding: 25px 20px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+h1 { margin: 0; font-size: 1.5em; }
+main { padding: 20px; }
+
+.card {
+    background-color: #f8f8ff; /* Fondo de tarjeta ligeramente azulado */
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+h2 {
+    color: var(--dark-blue); /* Nuevo color para títulos */
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+/* --- BARRA DE NAVEGACIÓN (Layout Modificado) --- */
+#nav-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--dark-blue); /* Nuevo color de menú */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 500;
+    display: flex; /* Contenedor principal flex */
+    justify-content: space-between; /* Distribuye espacio entre enlaces y búsqueda */
+    align-items: center;
+    padding: 0 15px;
+    height: 50px;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center; /* Centra los enlaces */
+    flex-grow: 1; /* Permite que ocupe espacio central */
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    padding: 15px 10px; /* Reducido el padding horizontal */
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.nav-item:hover, .nav-item.manual-toggle:hover {
+    background-color: #5b8fb3;
+}
+
+.nav-item.manual-toggle {
+    background-color: var(--primary-blue); /* Celeste más claro para manual/contacto */
+    font-weight: bold;
+}
+.nav-item.contact-toggle {
+    background-color: #e67e22; /* Color cálido para el contacto */
+    font-weight: bold;
+}
+
+/* BÚSQUEDA INTEGRADA EN EL MENÚ */
+.search-group-nav {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.search-group-nav input {
+    padding: 5px 8px;
+    border: 1px solid white;
+    border-radius: 4px 0 0 4px;
+    font-size: 0.9em;
+    width: 120px;
+}
+
+.search-group-nav button {
+    background-color: var(--success-green);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    line-height: 1.3;
+}
+/* --- FIN BARRA DE NAVEGACIÓN --- */
+
+
+/* --- BOTONES Y MENSAJES --- */
+#calculateBtn { background-color: var(--primary-blue); color: white; /* ... */ }
+#calculateBtn:hover { background-color: var(--dark-blue); }
+#calculateBtn.calculating { background-color: var(--gray-button); }
+.loader-small { border-top: 3px solid #ffffff; }
+
+.secondary-btn { background-color: var(--gray-button); /* ... */ }
+
+/* Mensajes de Estado */
+.status-message { padding: 12px; margin-bottom: 20px; border-radius: 4px; font-weight: bold; }
+.info { background-color: #eaf6ff; color: var(--dark-blue); border: 1px solid var(--primary-blue); }
+.error { background-color: #ffeaea; color: var(--error-red); border: 1px solid var(--error-red); }
+
+/* Función Display */
+.function-display { background-color: var(--primary-blue); color: white; /* ... */ }
+
+/* Resultados */
+.results-table-container h3 {
+    background-color: var(--dark-blue); /* Encabezados de tabla más oscuros */
+    color: white;
+    /* ... */
+}
+
+/* Resaltado de búsqueda */
+.card.highlight {
+    border-color: var(--success-green);
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.6);
+}
+
+/* --- APARTADO DE CONTACTO DETALLADO --- */
+.contact-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+.contact-info-grid strong {
+    color: var(--dark-blue);
+    font-size: 1em;
+}
+.contact-info-grid p {
+    margin: 5px 0 0 0;
+    font-size: 0.95em;
+}
+
+/* Media Queries para Responsive */
+@media (max-width: 768px) {
+    #nav-menu {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 0;
+    }
+    .nav-links {
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    .nav-item {
+        padding: 8px 10px;
+    }
+    .search-group-nav {
+        margin-top: 10px;
+        width: 90%;
+        margin-left: 0;
+    }
+    .search-group-nav input {
+        width: 100%;
+    }
+    .contact-info-grid {
+        grid-template-columns: 1fr;
+    }
+}

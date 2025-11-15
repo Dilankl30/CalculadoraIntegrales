@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Optimización e Integral Cuadrática</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav id="nav-menu">
+        <a href="#entrada" class="nav-item">Entrada de la Función</a>
+        <a href="#parametros" class="nav-item">Parámetros de Cálculo</a>
+        <a href="#resultados" class="nav-item">Resultados</a>
+        <a href="#manual" class="nav-item manual-toggle">Manual de Usuario</a>
+    </nav>
+    
+    <div class="container">
+        <header>
+            <h1>CALCULADORA DE OPTIMIZACIÓN E INTEGRAL CUADRÁTICA</h1>
+        </header>
+
+        <main>
+            <div id="system-status" class="status-message info">
+                ¡Bienvenido! Ingresa los coeficientes y haz clic en CALCULAR.
+            </div>
+
+            <section class="card" id="busqueda">
+                <h2>🔍 BÚSQUEDA RÁPIDA (Filtros y Palabras Clave)</h2>
+                <div class="search-group">
+                    <input type="text" id="keywordSearch" placeholder="Ej: Integral Definida, Vértice, Constante C..." onkeyup="filterSections()">
+                    <button onclick="filterSections()">Buscar</button>
+                </div>
+                <div id="search-feedback" class="help-text">Utiliza palabras clave para destacar secciones o términos en la página.</div>
+            </section>
+            
+            <section class="card" id="entrada"> 
+                <h2>ENTRADA DE LA FUNCIÓN CUADRÁTICA</h2>
+                <p class="help-text">La función debe tener la forma: $f(x) = ax^2 + bx + c$</p>
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="coefA">Coeficiente a (término $x^2$)</label>
+                        <input type="number" id="coefA" value="1" onkeyup="updateFunctionDisplay(); calculate(true)" onchange="updateFunctionDisplay(); calculate(true)">
+                    </div>
+                    <div class="input-field">
+                        <label for="coefB">Coeficiente b (término $x$)</label>
+                        <input type="number" id="coefB" value="-4" onkeyup="updateFunctionDisplay(); calculate(true)" onchange="updateFunctionDisplay(); calculate(true)">
+                    </div>
+                    <div class="input-field">
+                        <label for="coefC">Coeficiente c (término constante)</label>
+                        <input type="number" id="coefC" value="3" onkeyup="updateFunctionDisplay(); calculate(true)" onchange="updateFunctionDisplay(); calculate(true)">
+                    </div>
+                    <div class="function-display">
+                        <span id="functionEq">f(x) = 1x² - 4x + 3</span>
+                    </div>
+                </div>
+                <button id="resetBtn" class="secondary-btn" onclick="resetForm()">Reiniciar Valores</button>
+            </section>
+
+            <section class="card" id="parametros">
+                <h2>PARÁMETROS DE CÁLCULO</h2>
+                <div class="input-group calculation-params">
+                    <div class="input-field">
+                        <label for="limitA">Límite Inferior (a)</label>
+                        <input type="number" id="limitA" value="0" onkeyup="calculate(true)" onchange="calculate(true)">
+                    </div>
+                    <div class="input-field">
+                        <label for="limitB">Límite Superior (b)</label>
+                        <input type="number" id="limitB" value="5" onkeyup="calculate(true)" onchange="calculate(true)">
+                    </div>
+                    <button id="calculateBtn" onclick="calculate()">
+                        <span id="button-text">CALCULAR</span>
+                        <div class="loader-small" id="calc-loader"></div>
+                    </button>
+                </div>
+            </section>
+            
+            <section class="card" id="manual">
+                <h2>📚 MANUAL DE USUARIO Y FUNCIONAMIENTO</h2>
+                <div class="manual-content-box">
+                    <h3>1. Definición de la Función Cuadrática</h3>
+                    <p>Utilice los campos **Coeficiente a, b, y c** para definir la función. La calculadora trabaja con la forma general: $f(x) = ax^2 + bx + c$. Los resultados se actualizarán automáticamente a medida que cambie los valores.</p>
+                    <ul>
+                        <li>**Coeficiente a ($x^2$):** Controla si la parábola abre hacia arriba (a > 0, mínimo) o hacia abajo (a < 0, máximo).</li>
+                        <li>**Coeficiente c (Constante):** Muestra el punto de corte con el eje Y.</li>
+                    </ul>
+
+                    <h3>2. Parámetros de Cálculo (Integral)</h3>
+                    <p>Los campos **Límite Inferior (a)** y **Límite Superior (b)** definen el intervalo para el cálculo de la **Integral Definida**. La integral representa el área bajo la curva de la función $f(x)$ entre esos dos puntos.</p>
+                    
+                    <h3>3. Resultados</h3>
+                    <p>La sección **Resultados Detalles** le proporciona:</p>
+                    <ul>
+                        <li>**Análisis de Vértice:** Indica el punto exacto de mínimo o máximo de la función.</li>
+                        <li>**Integral Indefinida:** Muestra la antiderivada de la función ($F(x) + C$).</li>
+                        <li>**Integral Definida:** El valor numérico final del área calculada, expresado en unidades cuadradas.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="card results-section" id="resultados">
+                <h2>RESULTADOS DETALLES</h2>
+                <div class="results-grid">
+                    <div class="results-table-container">
+                        <h3>ANÁLISIS DE MÍNIMOS Y MÁXIMOS (VÉRTICE)</h3>
+                        <table>
+                            <thead><tr><th>Concepto</th><th>Resultado</th></tr></thead>
+                            <tbody>
+                                <tr><td>Tipo de Vértice</td><td id="vertexType">Mínimo</td></tr>
+                                <tr><td>Coordenada x (Eje de simetría)</td><td id="vertexX">2</td></tr>
+                                <tr><td>Coordenada y (Valor Óptimo)</td><td id="vertexY">-1</td></tr>
+                                <tr class="highlight-row"><td>Punto del Vértice</td><td id="vertexPoint">(2, -1)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="results-table-container">
+                        <h3>RESULTADOS DE LA INTEGRAL</h3>
+                        <table>
+                            <thead><tr><th>Concepto</th><th>Resultado</th></tr></thead>
+                            <tbody>
+                                <tr><td>Integral Indefinida</td><td id="indefiniteIntegral">ax³/3 + bx²/2 + cx + C</td></tr>
+                                <tr class="highlight-row green-highlight"><td>Integral Definida</td><td id="definiteIntegral">13.33 unidades cuadradas</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            </main>
+    </div>
+
+    <footer class="footer-contact">
+        <p><strong>Contáctanos:</strong> flor@esppch.edu.ec</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
